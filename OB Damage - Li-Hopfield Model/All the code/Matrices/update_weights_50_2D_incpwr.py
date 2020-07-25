@@ -5,16 +5,15 @@ Created on Tue Dec 18 13:38:32 2018
 @author: wmmjk
 """
 
-#Olfactory Bulb Model a la Li/Hopfield and Li/Hertz
-#Translated from Avinash's Matlab code
-#This one I have the initial condition in odeint as the equilibrium at rest plus noise
+#Matrices are updated randomly until both the average oscillatory power per cell and the participation number (Inverse Participation Ratio, IPR)
+#reach their respective threshold values. The average power per cell ensured a sufficient level of oscillatory activity, IPR ensured a large 
+#enough proportion of the network was responding. IPR is calculated by creating a vector (psi) where each entry is the integrated power spectrum
+#for a given mitral cell. Psi is then normalized, and IPR is calculated as 1/np.sum(psi^4). This gives a minimum value of 1 (if only one mitral cell
+#responds to the odor input) and a maximum value of Nmitral (if every mitral cell participates equally). Once conditions were satisfied, each
+#candidate matrix was reviewed manually.
 
-#Change Log
-
-#01/28/19   - added a variable "yout" so I could look at both internal state and 
-#            output after solving ode
-#
-#01/29/19                
+#In the case of the 2D 100 unit network, the matrix was first updated until IPR was sufficiently high, then updated again until average power per
+#cell was high enough.
 
 #THIS SCRIPT IS FOR FINDING A WEIGHT MATRIX VIA RANDOM UPDATES                                
 
