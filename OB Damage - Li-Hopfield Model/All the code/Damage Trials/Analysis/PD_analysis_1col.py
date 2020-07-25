@@ -4,22 +4,14 @@ Created on Tue Dec 18 13:38:32 2018
 
 @author: wmmjk
 """
+#This code was to process Columnar and Seed Damage trials
 
-#Olfactory Bulb Model a la Li/Hopfield and Li/Hertz
-#Translated from Avinash's Matlab code
-#This one I have the initial condition in solveivp as the equilibrium at rest plus noise
+#For the plots shown in the paper, the standard deviation calculated here was then divided by sqrt(Nmitral) to give the SEM
+#Nmitral because the trial was repeated Nmitral times, for each mitral cell as the first cell to be damaged in columnar or seed
 
-#Calculates phase differences, distance measure terms, high and low-passed output,
-#power spectrum, IPR
-
-#Change Log
-
-#01/28/19   - added a variable "yout" so I could look at both internal state and 
-#            output after solving ode
-#
-#01/29/19      
-
-#08/2/19    - Was printing out the row of vA instead of the column. fixed now.        
+#IPR is calculated by creating a vector (psi) where each entry is the integrated power spectrum
+#for a given mitral cell. Psi is then normalized, and IPR is calculated as 1/np.sum(psi^4). This gives a minimum value of 1 (if only one mitral cell
+#responds to the odor input) and a maximum value of Nmitral (if every mitral cell participates equally).  
 
 import numpy as np
 #import scipy.linalg as lin
